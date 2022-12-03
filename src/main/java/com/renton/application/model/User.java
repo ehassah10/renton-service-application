@@ -41,7 +41,7 @@ public class User {
         this.dateModified = dateModified;
         this.password = password;
     }
-
+    //testing commit
     public String getPrimaryEmail() {
         return primaryEmail;
     }
