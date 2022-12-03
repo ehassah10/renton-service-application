@@ -12,6 +12,21 @@ public class Item {
 
     @Transient
     public static final String SEQUENCE_NAME = "order_item_sequence";
+
+    public Item(long id, String name, String descriptiom, int quantity, String latitude, String longitude, int addedBy, double price, Enum.orderItemStatus status, Date startDate, Date endDate) {
+        this.id = id;
+        this.name = name;
+        this.descriptiom = descriptiom;
+        this.quantity = quantity;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.addedBy = addedBy;
+        this.price = price;
+        this.status = status;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     @Id
     private long id;
     private String name;

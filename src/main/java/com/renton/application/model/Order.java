@@ -12,6 +12,17 @@ import java.util.Date;
 public class Order {
     @Transient
     public static final String SEQUENCE_NAME = "order_sequence";
+
+    public Order(int orderedBy, int orderedTo, Item[] orderItems, Double totalPrice, Enum.orderStatus status, Date dateAdded, Date dateModified) {
+        this.orderedBy = orderedBy;
+        this.orderedTo = orderedTo;
+        this.orderItems = orderItems;
+        this.totalPrice = totalPrice;
+        this.status = status;
+        this.dateAdded = dateAdded;
+        this.dateModified = dateModified;
+    }
+
     @Id
     public long id;
     public int orderedBy;

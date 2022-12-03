@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping(OrderController.BASE_URL)
 public class OrderController {
-    public static final String BASE_URL = "/api/v1/Orders";
+    public static final String BASE_URL = "/api/v1/orders";
     private final OrderService orderService;
 
     public OrderController(OrderService orderService) {

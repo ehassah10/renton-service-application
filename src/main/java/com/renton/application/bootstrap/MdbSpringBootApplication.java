@@ -2,7 +2,9 @@ package com.renton.application.bootstrap;
 
 import com.renton.application.model.*;
 import com.renton.application.repositories.ItemRepository;
+import com.renton.application.repositories.OrderRepository;
 import com.renton.application.repositories.UserRepository;
+import com.renton.application.service.implementation.SequenceGeneratorService;
 import com.renton.application.utils.Enum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,8 +20,7 @@ import java.util.List;
 public class MdbSpringBootApplication implements CommandLineRunner {
 
     @Autowired
-    UserRepository userRepository;
-
+    OrderRepository orderRepository;
     public static void main(String[] args) {
         SpringApplication.run(MdbSpringBootApplication.class, args);
     }
@@ -31,6 +32,10 @@ public class MdbSpringBootApplication implements CommandLineRunner {
     void createItems() {
         System.out.println("Data creation started...");
 
+        Item item = new Item(2, "item name1", "this is desc", 3, "3,4,4,3,","34.33",33,4.3,Enum.orderItemStatus.New, new Date(), new Date());
+        Order order = new Order(3,4,new Item[]{item},4.2, Enum.orderStatus.New, new Date(), new Date());
+        order.setId(2);
+        orderRepository.save(order);
         System.out.println("Data creation complete...");
 
     }

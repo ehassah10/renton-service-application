@@ -3,9 +3,10 @@ package com.renton.application.service.implementation;
 import com.renton.application.model.Order;
 import com.renton.application.repositories.OrderRepository;
 import com.renton.application.service.OrderService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final SequenceGeneratorService sequenceGeneratorService;
