@@ -1,8 +1,11 @@
 package com.renton.application.service.implementation;
 
 import com.renton.application.model.Order;
+import com.renton.application.model.OrderItem;
 import com.renton.application.repositories.OrderRepository;
 import com.renton.application.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +13,8 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final SequenceGeneratorService sequenceGeneratorService;
+    @Autowired
+    protected MongoTemplate mongoTemplate;
 
     public OrderServiceImpl(OrderRepository orderRepository, SequenceGeneratorService sequenceGeneratorService) {
         this.orderRepository = orderRepository;
@@ -27,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order save(Order order) {
+    public Order saveItem(Order order) {
         order.setId(sequenceGeneratorService.generateSequence(order.SEQUENCE_NAME));
         return orderRepository.save(order);
     }
@@ -35,5 +40,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void delete(Long id) {
         orderRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveItem(OrderItem orderItem, Long orderId) {
+        Order order = this.findById(orderId);
+        orderItem.setId(sequenceGeneratorService.generateSequence(orderItem.SEQUENCE_NAME));
+        order.orderItems.add(orderItem);
+        mongoTemplate.save(order);
     }
 }

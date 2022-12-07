@@ -6,6 +6,11 @@ public class Enum {
         New,
         Pending
     }
+
+    public enum itemStatus {
+        New,
+        Pending
+    }
     public enum orderStatus {
         New,
         Pending

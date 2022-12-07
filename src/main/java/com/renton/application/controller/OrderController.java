@@ -1,6 +1,7 @@
 package com.renton.application.controller;
 
 import com.renton.application.model.Order;
+import com.renton.application.model.OrderItem;
 import com.renton.application.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +31,14 @@ public class OrderController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Order save(@RequestBody Order Order){
-        return orderService.save(Order);
+    public Order save(@RequestBody Order order){
+        return orderService.saveItem(order);
+    }
+
+    @PutMapping()
+    @RequestMapping(value = "/{id}/saveItem", method = RequestMethod.PUT)
+    public void saveItem(@RequestBody OrderItem orderItem, @PathVariable int id){
+        orderService.saveItem(orderItem, Long.parseLong(String.valueOf(id)));
     }
 
     @DeleteMapping()

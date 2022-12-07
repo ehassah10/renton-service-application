@@ -12,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,10 +32,10 @@ public class MdbSpringBootApplication implements CommandLineRunner {
     }
     void createItems() {
         System.out.println("Data creation started...");
-
-        Item item = new Item(2, "item name1", "this is desc", 3, "3,4,4,3,","34.33",33,4.3,Enum.orderItemStatus.New, new Date(), new Date());
-        Order order = new Order(3,4,new Item[]{item},4.2, Enum.orderStatus.New, new Date(), new Date());
-        order.setId(2);
+        OrderItem orderItem = new OrderItem(1,2,"name","ddf",2,4.3, Enum.orderItemStatus.New);
+        List<OrderItem> olist = new ArrayList<>();
+        olist.add(orderItem);
+        Order order = new Order(2,2,2, olist,3.4, Enum.orderStatus.New, new Date(), new Date());
         orderRepository.save(order);
         System.out.println("Data creation complete...");
 
